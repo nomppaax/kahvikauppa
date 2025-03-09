@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="~{admin::head}"></head>
+  <body>
+    <header th:replace="~{index::header}"></header>
+    <main>
+      <section class="admin-section">
+        <h2>ADMIN</h2>
+        <div th:replace="~{admin::exit-button}"></div>
+        <button>
+          <a th:href="@{/admin}">Tuotteet</a>
+        </button>
+        <button><a th:href="@{/toimittajat}">Toimittajat</a></button>
+        <button><a th:href="@{/valmistajat}">Valmistajat</a></button>
+        <button><a th:href="@{/osastot}">Osastot</a></button>
+        <!-- <button><a th:href="@{/vipasiakkaat}">VIP-asiakkaat</a></button> -->
+      </section>
+
+      <section class="edit-section">
+        <h3>Muokkaa tuotetietoja:</h3>
+        <figure class="edit-product-figure">
+          <img th:src="${imageURL}" alt="Product Image" />
+        </figure>
+        <form
+          class="form-flex"
+          th:action="@{/updateProduct/{id}(id=${product.id})}"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <label for="name">Tuotteen nimi:</label>
+          <input
+            th:value="${product.name}"
+            type="text"
+            name="name"
+            id="name"
+            required
+          />
+          <label for="price">Tuotteen hinta:</label>
+          <input
+            th:value="${product.price}"
+            type="text"
+            name="price"
+            id="price"
+            placeholder="Syötä hinta muodossa XXX.XX"
+            pattern="\d+(\.\d{2})?"
+            required
+          />
+          <label for="description">Tuotteen kuvaus:</label>
+          <textarea
+            th:utext="${description}"
+            name="description"
+            id="description"
+            rows="7"
+            required
+            maxlength="2000"
+            style="margin-block-end: 0"
+            oninput="updateCharCount()"
+          ></textarea>
+          <div
+            id="charCount"
+            th:text="${description.length() + '/2000'}"
+            style="margin-block-end: 1rem; font-size: 1.2rem"
+          ></div>
+          <!-- <label for="productImage">Kuva:</label>
+          <input
+            th:value="${imageURL}"
+            type="file"
+            name="productImage"
+            id="productImage"
+            accept="image/*"
+            required
+          /> -->
+          <label for="department">Osasto:</label>
+          <select name="departmentId" id="department" required>
+            <option value="">Valitse osasto</option>
+            <option
+              th:each="department : ${departments}"
+              th:value="${department.id}"
+              th:text="${department.name}"
+              th:selected="${department.id == product.osasto.id}"
+            ></option>
+          </select>
+          <label for="supplier">Toimittaja:</label>
+          <select name="supplierId" id="supplier" required>
+            <option value="">Valitse toimittaja</option>
+            <option value="new">Lisää uusi toimittaja</option>
+            <option
+              th:each="supplier : ${suppliers}"
+              th:value="${supplier.id}"
+              th:text="${supplier.name}"
+              th:selected="${supplier.id == product.toimittaja.id}"
+            ></option>
+          </select>
+          <!-- LISÄTÄÄN UUSI TOIMITTAJA JOS TARVITSEE -->
+          <label
+            for="newSupplierNameInput"
+            id="newSupplierNameLabel"
+            style="display: none; margin-inline-start: 2rem"
+            >Uuden toimittajan nimi:</label
+          >
+          <input
+            type="text"
+            id="newSupplierNameInput"
+            name="newSupplierName"
+            style="
+              display: none;
+              margin-inline-start: 2rem;
+              border: 1.5px solid r#015ECC;
+            "
+            th:if="${isNewSupplier}"
+          />
+
+          <label for="producer">Valmistaja:</label>
+          <select name="producerId" id="producer" required>
+            <option value="">Valitse valmistaja</option>
+            <option value="new">Lisää uusi valmistaja</option>
+            <option
+              th:each="producer : ${producers}"
+              th:value="${producer.id}"
+              th:text="${producer.name}"
+              th:selected="${producer.id == product.valmistaja.id}"
+            ></option>
+          </select>
+          <!-- LISÄTÄÄN UUSI VALMISTAJA JOS TARVITSEE -->
+          <label
+            for="newProducerNameInput"
+            id="newProducerNameLabel"
+            style="display: none; margin-inline-start: 2rem"
+            >Uuden valmistajan nimi:</label
+          >
+          <input
+            type="text"
+            id="newProducerNameInput"
+            name="newProducerName"
+            style="
+              display: none;
+              margin-inline-start: 2rem;
+              border: 1.5px solid #015ecc;
+            "
+            th:if="${isNewProducer}"
+          />
+          <input
+            class="submit-button"
+            type="submit"
+            value="Tallenna muutokset"
+          />
+        </form>
+        <button>
+          <a th:href="@{/admin}"
+            ><i class="fa-solid fa-arrow-left-long"></i> Takaisin</a
+          >
+        </button>
+      </section>
+    </main>
+    <div th:replace="~{index::footer}"></div>
+  </body>
+</html>

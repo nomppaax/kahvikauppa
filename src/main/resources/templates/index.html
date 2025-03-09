@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:fragment="head">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rööperin kahvikauppa</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.png}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/e00b2e3114.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/products.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <script
+      type="module"
+      th:src="@{/javascript/scrollBehavior.js}"
+      defer
+    ></script>
+    <script type="module" th:src="@{/javascript/orderForm.js}" defer></script>
+  </head>
+  <body>
+    <header th:fragment="header">
+      <section class="upper-bar">
+        <figure>
+          <a th:href="@{/}"> <img th:src="@{/images/logo.png}" alt="logo" /></a>
+        </figure>
+        <nav>
+          <ul class="navigation-items">
+            <li><a th:href="@{/}">Etusivu</a></li>
+            <li>
+              <a th:href="@{/kahvilaitteet}">Kahvilaitteet</a>
+            </li>
+            <li>
+              <a th:href="@{/kulutustuotteet}">Kulutustuotteet</a>
+            </li>
+            <li id="admin-link">
+              <a th:href="@{/admin}" style="margin-inline-end: 2rem">
+                <span>Admin</span>
+                <i class="fa-regular fa-user"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </section>
+      <section class="header-text">
+        <h1>Rööperin Kahvikauppa</h1>
+        <p>Tervetuloa Kahvikauppaan</p>
+        <p>Myymme kahvilalaitteita ja -tuotteita</p>
+        <p id="header-text-a-margin">
+          Ota yhteyttä
+          <span id="header-text-a"><a href="#footer">Kahvikauppa</a></span>
+        </p>
+      </section>
+    </header>
+    <main>
+      <div class="cardflexes">
+        <div class="card">
+          <figure class="cardpicturesize">
+            <img th:src="@{/images/cardphoto4.jpg}" alt="coffee-machine" />
+          </figure>
+          <h3>Kahvilaitteet</h3>
+          <p>
+            <a th:href="@{/kahvilaitteet}"
+              >Valikoimaan
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </p>
+        </div>
+        <div class="card">
+          <figure class="cardpicturesize">
+            <img th:src="@{/images/cardphoto3.jpeg}" alt="coffee-maker" />
+          </figure>
+          <h3>Kulutustuotteet</h3>
+          <p>
+            <a th:href="@{/kulutustuotteet}"
+              >Valikoimaan
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </p>
+        </div>
+        <!-- <div class="card">
+          <figure class="cardpicturesize">
+            <img th:src="@{/images/cardpic3.png}" alt="coffee" />
+          </figure>
+          <h3>Rekisteröidy VIP-asiakkaaksemme</h3>
+          <p>
+            <a th:href="@{/vipasiakas}"
+              >Rekisteröidy
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </p>
+        </div> -->
+      </div>
+    </main>
+    <div th:fragment="footer">
+      <footer id="footer">
+        <section class="footer-contact">
+          <h4>Yhteystiedot</h4>
+          <p>Rööperin Kahvikauppa</p>
+          <p>Rööperinkuja 4,</p>
+          <p>00120 Helsinki</p>
+          <p>0451234258</p>
+          <p>rooperi@kahvikauppa.fi</p>
+        </section>
+        <section class="footer-about-us">
+          <h4>Tietoa meistä</h4>
+          <p><a href="#">Toimitusehdot</a></p>
+          <p><a href="#">Tietosuojaseloste</a></p>
+          <p>Y-tunnus: 346239-8</p>
+        </section>
+        <section class="footer-icons">
+          <h4 id="icons-h4">Sosiaalisessa mediassa</h4>
+          <p>
+            <a href="#">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+          </p>
+          <p>
+            <a href="#">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+          </p>
+          <p>
+            <a href="#">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+          </p>
+          <p>
+            <a href="#">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+          </p>
+          <p>
+            <a href="#">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+          </p>
+        </section>
+        <p id="copyright">
+          Copyright © 2025 Rööperin Kahvikauppa. All rights reserved.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

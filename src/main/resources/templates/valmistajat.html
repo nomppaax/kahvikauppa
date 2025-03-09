@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="~{index::head}"></head>
+  <body>
+    <header th:replace="~{index::header}"></header>
+    <main>
+      <section
+        th:if="${message}"
+        th:class="${message.startsWith('Valmistaja poistettu') ? 'success-message' : 'error-message'}"
+      >
+        <p th:text="${message}"></p>
+      </section>
+      <section class="admin-section">
+        <h2>ADMIN</h2>
+        <div th:replace="~{admin::exit-button}"></div>
+        <a th:href="@{/admin}"><button>Tuotteet</button></a>
+        <a th:href="@{/toimittajat}"><button>Toimittajat</button></a>
+        <a th:href="@{/valmistajat}"
+          ><button style="background-color: #d5e1ca">Valmistajat</button></a
+        >
+        <a th:href="@{/osastot}"><button>Osastot</button></a>
+        <!-- <a th:href="@{/vipasiakkaat}"><button>VIP-asiakkaat</button></a> -->
+      </section>
+      <div class="add-section">
+        <h3>Lisää uusi valmistaja:</h3>
+        <form class="form-flex" th:action="@{/valmistajat}" method="POST">
+          <label for="name">Valmistajan nimi:</label>
+          <input type="text" name="name" id="name" required />
+          <label for="url">Nettisivut:</label>
+          <input type="text" name="url" id="url" required />
+          <input class="submit-button" type="submit" value="Lisää" />
+        </form>
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Valmistajan nimi</th>
+            <th>Nettisivut</th>
+            <th style="width: 13%">Tuotteiden määrä valikoimassa</th>
+            <th style="width: 15%">Tarkemmat tiedot/muokkaa</th>
+            <th style="width: 10%"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr th:each="producer : ${producers}">
+            <td th:text="${producer.name}">Producer's name</td>
+            <td>
+              <a
+                th:href="${producer.url}"
+                th:text="${producer.url}"
+                target="_blank"
+                >Producer's website</a
+              >
+            </td>
+            <td th:text="${producer.productCount}">Product count</td>
+            <td>
+              <button class="update-button">
+                <a th:href="@{/updateProducer/{id}(id=${producer.id})}"
+                  >Muokkaa</a
+                >
+              </button>
+            </td>
+            <td>
+              <form
+                th:action="@{/deleteProducer/{id}(id=${producer.id})}"
+                method="POST"
+              >
+                <button class="delete-button" type="submit" value="Poista">
+                  Poista
+                </button>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="5" style="font-style: italic; text-align: center">
+              Taulukossa on yhteensä
+              <span th:text="${producers.size()}">0</span>
+              valmistajaa.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <div th:replace="~{index::footer}"></div>
+  </body>
+</html>

@@ -1,0 +1,473 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 1rem;
+  font-size: 1.6rem;
+  font-family: "Café Francoise";
+}
+
+header {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../images/main.jpeg");
+  max-height: 100%;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 55rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.upper-bar {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 94vw;
+  z-index: 999;
+}
+
+.navigation-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: end;
+  align-items: center;
+  padding: 1.8rem;
+  border-radius: 1px;
+  transition: background-color 1s ease, border 1s ease, color 1s ease;
+}
+
+.navigation-items a {
+  color: whitesmoke;
+  letter-spacing: 0.1rem;
+  text-decoration: none;
+  margin-inline-start: 2rem;
+}
+.navigation-items a:hover {
+  color: whitesmoke;
+  border-block-end: solid 0.5px black;
+}
+.upper-bar figure {
+  width: 10rem;
+  height: 10rem;
+}
+
+.header-text {
+  margin-block-start: 17rem;
+  font-family: "black coffee";
+  letter-spacing: 0.2rem;
+  font-size: 2rem;
+  color: whitesmoke;
+}
+
+.header-text p {
+  margin-block-start: 1rem;
+}
+
+#header-text-a a {
+  color: whitesmoke;
+}
+#header-text-a a:hover {
+  color: #4f453e;
+  border-block-end: solid 0.5px #4f453e;
+}
+#header-text-a-margin {
+  margin-block-start: 2rem;
+}
+h1 {
+  font-size: 6rem;
+  margin-block-end: 3rem;
+  margin-block-start: 2rem;
+}
+
+h2 {
+  font-size: 3rem;
+  margin: 2rem 1rem 1rem 1rem;
+}
+
+h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-block-end: 2rem;
+}
+
+.summary-p {
+  margin: 2rem 1rem 1rem 2rem;
+}
+
+/* FOOTER H-KOKO */
+h4 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-block-end: 2rem;
+}
+
+h5 {
+  font-size: 2.2rem;
+  margin-block-end: 1rem;
+}
+
+img {
+  max-width: 100%;
+}
+
+.cardflexes {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding: 2rem;
+  justify-content: space-around;
+}
+
+.card {
+  border: 1px solid darkgray;
+  transition: 0.3s;
+  padding: 1rem;
+  margin: 1rem;
+  width: 33%;
+}
+
+.card h3,
+.card p,
+.card figure {
+  margin-block-end: 1rem;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
+}
+.card a {
+  text-decoration: none;
+  color: black;
+}
+.card a:hover {
+  color: #4f453e;
+  font-style: italic;
+  letter-spacing: 0.1rem;
+}
+
+.card i {
+  margin-inline-start: 1rem;
+}
+.card img {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+}
+
+footer {
+  padding: 4rem 2rem 2rem 2rem;
+  background-color: #9e7059;
+  color: whitesmoke;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+footer p {
+  margin-block-start: 1rem;
+}
+
+footer a {
+  color: whitesmoke;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #a28474;
+  border-block-end: solid 1px#a28474;
+}
+
+footer > * {
+  width: 33%;
+  text-align: center;
+  letter-spacing: 0.1rem;
+}
+
+#copyright {
+  flex-basis: 100%;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-block-start: 4rem;
+}
+
+.footer-icons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.footer-icons > * {
+  flex-basis: 0;
+  font-size: 2rem;
+}
+
+#icons-h4 {
+  flex-basis: 100%;
+}
+
+button {
+  background-color: whitesmoke;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 1rem;
+  font-family: "Café Francoise", serif;
+  width: 15rem;
+}
+
+a {
+  text-decoration: unset;
+  color: black;
+}
+
+a:hover {
+  color: blue;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: rgb(224, 224, 224);
+  color: blue;
+}
+
+.update-button {
+  width: fit-content;
+}
+
+.update-button a:hover {
+  color: rgb(255, 149, 0);
+}
+
+.delete-button {
+  width: fit-content;
+}
+.delete-button:hover {
+  color: red;
+}
+
+.site-button {
+  width: fit-content;
+  padding: 0.5rem 2rem;
+}
+.site-button:hover,
+.submit-button:hover {
+  font-style: italic;
+  letter-spacing: 0.1rem;
+  color: #4f453e;
+  cursor: pointer;
+}
+
+.site-button a:hover {
+  color: #4f453e;
+}
+
+.search-input {
+  margin-block-end: 1rem;
+  margin-inline-start: 2rem;
+  padding: 0.5rem;
+  font-size: 1.6rem;
+  border-radius: 4px;
+  border: 0.8px black solid;
+  width: 35rem;
+  font-family: "Café Francoise", serif;
+}
+
+.page-buttons-flex {
+  display: flex;
+  margin: 1rem 0 0 1rem;
+  gap: 1rem;
+}
+
+.exit-button {
+  background-color: white;
+  border: 0.5px solid black;
+  border-radius: 1px;
+  padding: 1rem 4rem;
+  width: fit-content;
+  font-size: 1.2rem;
+  font-family: "Café Francoise", serif;
+  position: fixed;
+  bottom: 2rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.exit-button:hover {
+  color: red;
+  background-color: whitesmoke;
+}
+
+.admin-section {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+  gap: 2rem;
+}
+
+.admin-section h2 {
+  flex-grow: 1;
+}
+
+.add-section {
+  padding: 2rem;
+}
+
+.form-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.form-flex input,
+.form-flex textarea,
+.form-flex select {
+  margin-block-end: 1rem;
+  padding: 0.5rem;
+  font-size: 1.6rem;
+  border-radius: 4px;
+  border: 0.8px black solid;
+  width: 35rem;
+  font-family: "Café Francoise", serif;
+}
+
+input.submit-button {
+  background-color: whitesmoke;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 0.6rem 2.3rem;
+  margin-block-start: 1rem;
+  width: fit-content;
+  font-size: 1.4rem;
+  font-family: "Café Francoise", serif;
+}
+
+.admin-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-block-end: 3rem;
+  background-color: white;
+}
+
+.admin-table th,
+td {
+  border: 0.8px solid black;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.admin-table th {
+  background-color: #9e7059;
+  color: white;
+  align-content: center;
+}
+
+.edit-section {
+  padding: 2rem;
+}
+
+.edit-product-figure {
+  width: 36rem;
+  height: 36rem;
+}
+
+.edit-product-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-section {
+  padding: 4rem;
+  margin-inline-end: 20rem;
+}
+
+.product-section p,
+figure {
+  margin-block-end: 1rem;
+}
+
+.product-section figure {
+  width: 40rem;
+  height: 40rem;
+}
+
+.product-section figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-section h2 {
+  margin: 3rem 0;
+}
+
+.product-section p {
+  margin-block-end: 2rem;
+  margin-inline-end: 20rem;
+}
+
+.error-message {
+  border: 0.5px solid black;
+  color: red;
+  font-size: 1.6rem;
+  padding: 1.5rem;
+  margin: 1rem;
+  line-height: normal;
+}
+.success-message {
+  border: 0.5px solid black;
+  color: #9e7059;
+  font-size: 1.6rem;
+  padding: 1.5rem;
+  margin: 1rem;
+  line-height: normal;
+}
+
+/* Mobiili */
+@media only screen and (max-width: 425px) {
+  h1 {
+    font-size: 4rem;
+  }
+
+  footer > * {
+    width: unset;
+    flex-basis: 100%;
+    margin-block-end: 2rem;
+  }
+  .navigation-items {
+    flex-wrap: wrap;
+    margin-inline-end: 3rem;
+    padding: 1rem;
+  }
+
+  nav li {
+    margin-block-end: 1rem;
+  }
+  .cardflexes {
+    flex-wrap: wrap;
+  }
+  .card {
+    width: unset;
+  }
+  footer h4,
+  #icons-h4 {
+    font-size: 2.2rem;
+  }
+  footer p {
+    font-size: 1.4rem;
+  }
+  .admin-section {
+    flex-wrap: wrap;
+    justify-content: end;
+  }
+}

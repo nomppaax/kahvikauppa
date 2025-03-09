@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="~{index::head}"></head>
+  <body>
+    <header th:replace="~{index::header}"></header>
+    <main>
+      <section
+        th:if="${message}"
+        th:class="${message.startsWith('Osasto poistettu') ? 'success-message' : 'error-message'}"
+      >
+        <p th:text="${message}"></p>
+      </section>
+      <section class="admin-section">
+        <h2>ADMIN</h2>
+        <div th:replace="~{admin::exit-button}"></div>
+        <a th:href="@{/admin}"><button>Tuotteet</button></a>
+        <a th:href="@{/toimittajat}"><button>Toimittajat</button></a>
+        <a th:href="@{/valmistajat}"><button>Valmistajat</button></a>
+        <a th:href="@{/osastot}"
+          ><button style="background-color: #d5e1ca">Osastot</button></a
+        >
+      </section>
+      <div class="add-section">
+        <h3>Lisää osasto:</h3>
+        <form class="form-flex" th:action="@{/osastot}" method="POST">
+          <label for="name">Osaston nimi:</label>
+          <input type="text" name="name" id="name" required />
+          <label for="osastoIDP">Osasto IDP:</label>
+          <input type="text" name="osastoIDP" id="osastoIDP" required />
+          <input class="submit-button" type="submit" value="Lisää" />
+        </form>
+      </div>
+
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Osaston nimi</th>
+            <th>Osasto IDP</th>
+            <th style="width: 13%">Tuotteiden määrä valikoimassa</th>
+            <th style="width: 15%">Tarkemmat tiedot/muokkaa</th>
+            <th style="width: 10%"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr th:each="department : ${departments}">
+            <td th:text="${department.id}">Department's ID</td>
+            <td th:text="${department.name}">Departments's name</td>
+            <td th:text="${department.osastoIDP}">
+              Department's departmentIDP
+            </td>
+            <td th:text="${department.productCount}">Product count</td>
+            <td>
+              <button class="update-button">
+                <a th:href="@{/updateDepartment/{id}(id=${department.id})}"
+                  >Muokkaa</a
+                >
+              </button>
+            </td>
+            <td>
+              <form
+                th:action="@{/deleteDepartment/{id}(id=${department.id})}"
+                method="POST"
+              >
+                <button class="delete-button" type="submit" value="Poista">
+                  Poista
+                </button>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="6" style="font-style: italic; text-align: center">
+              Taulukossa on yhteensä
+              <span th:text="${departments.size()}">0</span>
+              osastoa.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <div th:replace="~{index::footer}"></div>
+  </body>
+</html>

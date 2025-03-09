@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="https://www.thymeleaf.org"
+>
+  <head th:replace="~{index::head}"></head>
+  <body>
+    <header th:replace="~{index::header}"></header>
+    <main>
+      <section style="padding: 1rem">
+        <div th:if="${param.error}" class="error-message">
+          Väärä käyttäjätunnus tai salasana.
+        </div>
+        <div th:if="${param.logout}" class="success-message">
+          Sinut on kirjattu ulos.
+        </div>
+        <h2 style="margin: 2rem 0">Kirjaudu sisään</h2>
+        <form
+          th:action="@{/login}"
+          method="post"
+          class="form-flex"
+          style="margin-inline-start: 2rem"
+        >
+          <label for="username">Käyttäjätunnus:</label>
+          <input type="text" id="username" name="username" />
+
+          <label for="password">Salasana:</label>
+          <input type="password" id="password" name="password" />
+
+          <input type="submit" value="Kirjaudu" class="submit-button" />
+        </form>
+
+        <button class="site-button" style="margin: 2rem 0">
+          <a th:href="@{/}"
+            ><i class="fa-solid fa-arrow-left-long"></i> Takaisin etusivulle</a
+          >
+        </button>
+      </section>
+    </main>
+    <div th:replace="~{index::footer}"></div>
+  </body>
+</html>

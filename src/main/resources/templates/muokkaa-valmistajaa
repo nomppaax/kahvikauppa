@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="~{index::head}"></head>
+  <body>
+    <header th:replace="~{index::header}"></header>
+    <main>
+      <section class="admin-section">
+        <h2>ADMIN</h2>
+        <div th:replace="~{admin::exit-button}"></div>
+        <button>
+          <a th:href="@{/admin}">Tuotteet</a>
+        </button>
+        <button><a th:href="@{/toimittajat}">Toimittajat</a></button>
+        <button><a th:href="@{/valmistajat}">Valmistajat</a></button>
+        <button><a th:href="@{/osastot}">Osastot</a></button>
+        <!-- <button><a th:href="@{/vipasiakkaat}">VIP-asiakkaat</a></button> -->
+      </section>
+
+      <section class="edit-section">
+        <h3>Muokkaa valmistajaa:</h3>
+        <form
+          class="form-flex"
+          th:action="@{/updateProducer/{id}(id=${producer.id})}"
+          method="POST"
+        >
+          <label for="name">Valmistajan nimi:</label>
+          <input
+            th:value="${producer.name}"
+            type="text"
+            name="name"
+            id="name"
+            required
+          />
+          <label for="url">Nettisivut:</label>
+          <input
+            th:value="${producer.url}"
+            type="text"
+            name="url"
+            id="url"
+            required
+          />
+          <input
+            class="submit-button"
+            type="submit"
+            value="Tallenna muutokset"
+          />
+        </form>
+        <button>
+          <a th:href="@{/valmistajat}"
+            ><i class="fa-solid fa-arrow-left-long"></i> Takaisin</a
+          >
+        </button>
+      </section>
+    </main>
+    <div th:replace="~{index::footer}"></div>
+  </body>
+</html>

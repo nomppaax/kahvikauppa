@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="~{index::head}"></head>
+  <body>
+    <header th:replace="~{index::header}"></header>
+    <main>
+      <section
+        th:if="${message}"
+        th:class="${message.startsWith('Toimittaja poistettu') ? 'success-message' : 'error-message'}"
+      >
+        <p th:text="${message}"></p>
+      </section>
+      <section class="admin-section">
+        <h2>ADMIN</h2>
+        <div th:replace="~{admin::exit-button}"></div>
+        <a th:href="@{/admin}"><button>Tuotteet</button></a>
+        <a th:href="@{/toimittajat}"
+          ><button style="background-color: #d5e1ca">Toimittajat</button></a
+        >
+        <a th:href="@{/valmistajat}"><button>Valmistajat</button></a>
+        <a th:href="@{/osastot}"><button>Osastot</button></a>
+        <!-- <a th:href="@{/vipasiakkaat}"><button>VIP-asiakkaat</button></a> -->
+      </section>
+      <div class="add-section">
+        <h3>Lisää uusi toimittaja:</h3>
+        <form class="form-flex" th:action="@{/toimittajat}" method="POST">
+          <label for="name">Toimittajan nimi:</label>
+          <input type="text" name="name" id="name" required />
+          <label for="contactPerson">Yhteyshenkilö:</label>
+          <input type="text" name="contactPerson" id="contactPerson" required />
+          <label for="contactPersonEmail">Yhteyshenkilön sähköposti:</label>
+          <input
+            type="email"
+            name="contactPersonEmail"
+            id="contactPersonEmail"
+            required
+          />
+          <input class="submit-button" type="submit" value="Lisää" />
+        </form>
+      </div>
+
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Toimittajan nimi</th>
+            <th>Yhteyshenkilö</th>
+            <th>Yhteyshenkilön sähköposti</th>
+            <th style="width: 13%">Tuotteiden määrä valikoimassa</th>
+            <th style="width: 15%">Tarkemmat tiedot/muokkaa</th>
+            <th style="width: 10%"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr th:each="supplier : ${suppliers}">
+            <td th:text="${supplier.name}">Suppliers name</td>
+            <td th:text="${supplier.contactPerson}">
+              Suppliers contact person
+            </td>
+
+            <td th:text="${supplier.contactPersonEmail}">
+              Contact person's email
+            </td>
+            <td th:text="${supplier.productCount}">Product count</td>
+            <td>
+              <button class="update-button">
+                <a th:href="@{/updateSupplier/{id}(id=${supplier.id})}"
+                  >Muokkaa</a
+                >
+              </button>
+            </td>
+            <td>
+              <form
+                th:action="@{/deleteSupplier/{id}(id=${supplier.id})}"
+                method="POST"
+              >
+                <button class="delete-button" type="submit" value="">
+                  Poista
+                </button>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="6" style="font-style: italic; text-align: center">
+              Taulukossa on yhteensä
+              <span th:text="${suppliers.size()}">0</span>
+              toimittajaa.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <div th:replace="~{index::footer}"></div>
+  </body>
+</html>

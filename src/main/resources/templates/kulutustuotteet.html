@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head th:replace="~{index::head}"></head>
+  <body>
+    <header th:replace="~{index::header}"></header>
+    <main>
+      <section
+        th:if="${message}"
+        th:class="${message.startsWith('Kiitos!') ? 'success-message' : 'error-message'}"
+      >
+        <p th:utext="${message}"></p>
+      </section>
+      <i
+        id="basket-icon"
+        class="fa-solid fa-basket-shopping"
+        onclick="showOrderList()"
+      ></i>
+      <h2>KULUTUSTUOTTEET</h2>
+      <div id="orderFormContainer" style="display: none">
+        <div style="display: flex; justify-content: space-between">
+          <h5>TILAUSLISTA</h5>
+          <i class="fa-solid fa-xmark" onclick="hideOrderList()"></i>
+        </div>
+        <ul id="orderList"></ul>
+        <p id="total" style="font-weight: bold; margin: 1rem 0"></p>
+        <form
+          id="orderForm"
+          th:action="@{/sendOrder}"
+          method="POST"
+          style="text-align: center"
+        >
+          <input
+            id="order-button"
+            class="submit-button"
+            style="text-align: center"
+            type="submit"
+            value="Lähetä tilaus"
+          />
+          <input type="hidden" name="page" th:value="kulutustuotteet" />
+        </form>
+      </div>
+      <p
+        class="summary-p"
+        th:text="' Sivu ' + (${pageNumber != null ? pageNumber : '1'}) + '/' + (${totalPages != null ? totalPages : '1'})"
+      ></p>
+      <p
+        style="margin: 1rem 0rem 2rem 2rem"
+        th:text="'Tuotteita sivulla: ' + ${kulutustuotteet.size()} + '/' + (${kaikkiKulutustuotteet != null ? kaikkiKulutustuotteet.size() : '0'})"
+      ></p>
+      <form th:action="@{/searchConsumerProducts}" method="GET">
+        <input
+          class="search-input"
+          type="text"
+          id="searchInput"
+          name="keyword"
+          placeholder="Etsi tuotteita"
+        />
+        <button class="site-button" type="submit" style="height: 35.5px">
+          Hae
+        </button>
+      </form>
+      <section
+        th:if="${keyword}"
+        class="error-message"
+        style="margin: 1rem 1rem 2rem 1rem"
+      >
+        <p th:text="${keyword}"></p>
+      </section>
+      <button
+        th:if="${keywordExists}"
+        class="site-button"
+        style="margin: 1rem 0 0 1rem"
+      >
+        <a th:href="@{/kulutustuotteet}"
+          ><i
+            class="fa-solid fa-arrow-left-long"
+            style="margin-inline-end: 1rem"
+          ></i
+          >Takaisin tuotteisiin</a
+        >
+      </button>
+      <section class="page-buttons-flex">
+        <div th:if="${currentPage > 0}">
+          <button class="site-button">
+            <a th:href="@{/kulutustuotteet(page=${currentPage - 1})}"
+              ><i
+                class="fa-solid fa-arrow-left-long"
+                style="margin-inline-end: 1rem"
+              ></i
+              >Edellinen sivu</a
+            >
+          </button>
+        </div>
+        <div th:if="${currentPage != null and currentPage &lt; totalPages - 1}">
+          <button class="site-button">
+            <a th:href="@{/kulutustuotteet(page=${currentPage + 1})}"
+              >Seuraava sivu<i
+                class="fa-solid fa-arrow-right-long"
+                style="margin-inline-start: 1rem"
+              ></i
+            ></a>
+          </button>
+        </div>
+      </section>
+      <section class="grid-container">
+        <div
+          class="grid-card"
+          th:each="product : ${kulutustuotteet}"
+          style="position: relative"
+        >
+          <figure class="grid-cardpicturesize">
+            <img th:src="@{/productImage/{id}(id=${product.id})}" />
+          </figure>
+          <div>
+            <h3 th:text="${product.name}">Laitteen nimi</h3>
+            <p th:text="${product.price} + '€'">Laitteen hinta</p>
+            <p>
+              <a th:href="@{/tuote/{id}(id=${product.id})}"
+                >Lisätietoja<i class="fa-solid fa-arrow-right-long"></i>
+              </a>
+            </p>
+            <button
+              class="site-button"
+              style="position: absolute; bottom: 1rem; right: 1rem"
+              th:value="${product.id + ':' + product.name + ':' + product.price}"
+              onclick="addToCart(this.getAttribute('value'));"
+            >
+              Tilaa
+              <i class="fa-solid fa-basket-shopping"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+      <section
+        class="page-buttons-flex"
+        style="justify-content: center; margin-block-end: 3rem"
+      >
+        <div th:if="${currentPage > 0}">
+          <button class="site-button">
+            <a th:href="@{/kulutustuotteet(page=${currentPage - 1})}"
+              ><i
+                class="fa-solid fa-arrow-left-long"
+                style="margin-inline-end: 1rem"
+              ></i
+              >Edellinen sivu</a
+            >
+          </button>
+        </div>
+        <div th:if="${currentPage != null and currentPage &lt; totalPages - 1}">
+          <button class="site-button">
+            <a th:href="@{/kulutustuotteet(page=${currentPage + 1})}"
+              >Seuraava sivu<i
+                class="fa-solid fa-arrow-right-long"
+                style="margin-inline-start: 1rem"
+              ></i
+            ></a>
+          </button>
+        </div>
+      </section>
+    </main>
+    <div th:replace="~{index::footer}"></div>
+  </body>
+</html>
